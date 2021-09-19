@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 from dj_database_url import parse as dburl
+APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -132,12 +133,12 @@ USE_TZ = True
 STATIC_URL = '/staticfiles/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
+    os.path.join(APP_ROOT, "staticfiles"),
 ]
 #STATIC_ROOT = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(APP_ROOT, 'staticfiles')
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(APP_ROOT, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
