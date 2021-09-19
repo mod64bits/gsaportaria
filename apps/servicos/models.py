@@ -19,7 +19,7 @@ class Categoria(models.Model):
 class Servico(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     titulo = models.CharField('Servico', max_length=150)
-    capa = models.ImageField("Capa", upload_to='servicos/imagens', default='servico_padrao.jpg')
+    capa = models.ImageField(upload_to='servicos/imagens', default='servico_padrao.jpg')
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='cat_servico')
     descricao = models.TextField('Descrição')
     created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
