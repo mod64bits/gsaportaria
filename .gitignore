@@ -5,11 +5,13 @@ _pycache__/
 *.xml
 .iml
 .xml
+pytest.ini
 media/
 apps/home/migrations/
 settings.ini
 # C extensions
 *.so
+passenger_wsgi.py
 # Distribution / packaging
 .Python
 develop-eggs/
