@@ -46,9 +46,8 @@
         </div>
         <div class="social-links">
             <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-            <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+            <a href="https://www.facebook.com/Gsaservicoseportaria" class="facebook"><i class="icofont-facebook"></i></a>
             <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-
             <a href="#" class="linkedin"><i class="icofont-linkedin"></i></a>
         </div>
     </div>
@@ -65,8 +64,7 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li><a href="{% url 'home:home' %}">Home</a></li>
-                <li class="active"><a href="#">Serviços</a></li>
-                <li><a href="#">Webmail</a></li>
+                <li class="active"><a href="{% url 'servicos:servicos' %}">Serviços</a></li>
                 <li><a href="#">Área do Cliente</a></li>
                 <li><a href="#">Contato</a></li>
             </ul>
@@ -80,13 +78,11 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
-
             <ol>
                 <li><a href="{% url 'home:home' %}">Home</a></li>
                 <li>Serviços /</li>
             </ol>
             <h2>{{ ser_detalhe.titulo }}</h2>
-
         </div>
     </section><!-- End Breadcrumbs -->
 
@@ -96,7 +92,7 @@
             <div class="portfolio-details-container">
                 <div class="owl-carousel portfolio-details-carousel">
                     {% for img in imagens %}
-                    <img src="{{ img.imagem.url }}" class="img-fluid" alt="">
+                        <img src="{{ img.imagem.url }}" class="img-fluid" alt="">
                     {% endfor %}
                 </div>
                 <div class="portfolio-info">
@@ -109,7 +105,7 @@
             <div class="portfolio-description">
                 <h2>{{ ser_detalhe.titulo|upper }}</h2>
                 <p>
-                   {{ ser_detalhe.descricao|upper }}
+                    {{ ser_detalhe.descricao|upper }}
                 </p>
             </div>
 
