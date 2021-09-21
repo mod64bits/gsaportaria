@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'apps.home',
     'apps.servicos',
+    'apps.contatos',
 ]
 
 MIDDLEWARE = [
