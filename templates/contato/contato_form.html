@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <form action="." method="post" role="form" class="php-email-form">{% csrf_token %}
+                    <form action="{% url 'home:contato' %}" method="post" role="form" class="php-email-form">{% csrf_token %}
                         <div class="form-row">
                             <div class="col-md-6 form-group">
                                 <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>

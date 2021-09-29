@@ -6,7 +6,7 @@ class ContatoForm(forms.Form):
         'class': 'form-control',
         'placeholder': 'Digite seu nome!',
     }))
-    email = forms.EmailField(label='e-mail', widget=forms.TextInput(attrs={
+    email = forms.EmailField(label='email', widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Digite seu melhor e-mail!',
     }))
