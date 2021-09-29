@@ -175,7 +175,7 @@
                     <div class="icon-box">
                         <div class="icon"><i class="bx bxl-dribbble"></i></div>
                         <h4><a href="">Portaria</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                        <p>O controlo de quem tem acesso às empresas é muito importante por questões de segurança</p>
                     </div>
                 </div>
 
@@ -183,14 +183,22 @@
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-file"></i></div>
                         <h4><a href="">Conservação</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                        <p>
+                             Pensando no bem-estar dos nossos clientes, oferecemos diversas soluções em limpeza
+                            conservação empresarial,  urbana e predial, ajudando a
+                            construir um amanhã mais sustentável.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="750">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Segurança</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                        <h4><a href="">Vigilância Eletrônica</a></h4>
+                        <p>
+                            As imagens captadas pelo sistema de CFTV são enviadas para a
+                            Central de Monitoramento, possibilitando a visualização em tempo
+                            real do ambiente. Este recurso aumenta consideravelmente a eficácia da prestação de serviço
+                        </p>
                     </div>
                 </div>
             </div>
@@ -369,32 +377,45 @@
                     <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.659759070915!2d-46.8978886857551!3d-22.740884337687692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8dea261af2eeb%3A0x2be1bb6064ff914d!2sAv.%20Papa%20Jo%C3%A3o%20XXIII%2C%2021%2C%20Pedreira%20-%20SP%2C%2013920-000!5e0!3m2!1spt-BR!2sbr!4v1631852590122!5m2!1spt-BR!2sbr" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
                 </div>
 
-                <div class="col-lg-6">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+               <div class="col-lg-6">
+                    <form action="{% url 'home:contato' %}" method="post" role="form" class="php-email-form">{% csrf_token %}
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Nome" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+                                {{ form.nome.errors }}
+                                {{ form.nome }}
                                 <div class="validate"></div>
                             </div>
                             <div class="col-md-6 form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                                 <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                                {{ form.email.errors }}
+                                {{ form.email }}
                                 <div class="validate"></div>
                             </div>
+
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Assunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                            <div class="validate"></div>
+                          <label for="{{ form.telefone.id_for_label }}">{{ form.telefone.label }}</label>
+                                {{ form.telefone.errors }}
+                                {{ form.telefone }}
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Menssagem"></textarea>
+                           <label for="{{ form.assunto.id_for_label }}">{{ form.assunto.label }}</label>
+                                {{ form.assunto.errors }}
+                                {{ form.assunto }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.mensagem.id_for_label }}">{{ form.mensagem.label }}</label>
+                                {{ form.mensagem.errors }}
+                                {{ form.mensagem }}
                             <div class="validate"></div>
                         </div>
                         <div class="mb-3">
-                            <div class="loading">Loading</div>
+                            <div class="loading">Enviando...</div>
                             <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                            <div class="sent-message">Em breve entraremos em contato!</div>
                         </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
+                        <div class="text-center"><button type="submit">Enviar</button></div>
                     </form>
                 </div>
 
