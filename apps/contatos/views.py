@@ -19,7 +19,7 @@ def contato(request):
             )
 
             messages.success(request, 'e-mail enviado com sucesso!')
-            return HttpResponseRedirect('/contato/')
+            return HttpResponseRedirect('/gsa/contato/')
         else:
             return render(request, 'contato/contato_form.html', {'form': form})
     else:
