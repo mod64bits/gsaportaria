@@ -8,14 +8,14 @@ from .forms import ContatoForm
 def contato(request):
     if request.method == 'POST':
         form = ContatoForm(request.POST)
-        body = "Olá  sua mensagem foi recebida em breve retornaremos o contato."
+        body = "Olá Novo Contato Via Site."
 
         if form.is_valid():
             mail.send_mail(
                 subject="Menssagem enviada com sucesso",
                 message=body,
                 from_email="contato@gsaportaria.com.br",
-                recipient_list=["contato@gsaportaria.com.br"],
+                recipient_list=["comercial2@gsaportaria.com.br", "gilsimar@gsaportaria.com.br"],
             )
 
             messages.success(request, 'e-mail enviado com sucesso!')

@@ -246,12 +246,12 @@
 
             <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="150">
                 {% for serv in servicos %}
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-{{ serv.servico.titulo }}">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-{{ serv.servico.categoria.titulo }}">
                         <img src="{{ serv.imagem.url }}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>{{ serv.servico.titulo }}</h4>
-                            <p>Web</p>
-                            <a href="{{ serv.imagem.url }}" data-gall="portfolioGallery" class="venobox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                            <p>{{ serv.categoria.titulo }}</p>
+                            <a href="{{ serv.imagem.url }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ serv.categoria.nome }}"><i class="bx bx-plus"></i></a>
 
                             <a href="{% url 'servicos:servico_detalhe'  serv.servico.id%}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
 
