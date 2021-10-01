@@ -8,7 +8,7 @@ from .forms import ContatoForm
 def remetente(email):
     mail.send_mail(
         subject="Menssagem recebida com sucesso",
-        message="sua Mensagem foi recebida em breve entraremos em contato\n se preferir nos mande uma mensagem via"
+        message="sua Mensagem foi recebida em breve entraremos em contato\n se preferir nos mande uma mensagem"
                 "via whatsapp 19 99345-6524",
         from_email="contato@gsaportaria.com.br",
         recipient_list=[email],
@@ -27,7 +27,6 @@ def destinatario(remetente, nome, telefone, mensagem):
 def contato(request):
     if request.method == 'POST':
         form = ContatoForm(request.POST)
-        body = "Olá Novo Contato Via Site."
 
         if form.is_valid():
             remetente(form["email"].value())
