@@ -152,8 +152,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # configuração de email
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_Host = 'h54.servidorhh.com'
+EMAIL_Host = config('EMAIL_Host')
 EMAIL_PORT = 465
-EMAIL_Host_USER = 'atendimento@gsaportaria.com.br'
-EMAIL_Host_PASSWORD = 'GsaRoot1020'
+EMAIL_Host_USER = config('EMAIL_Host_USER')
+EMAIL_Host_PASSWORD = config('EMAIL_Host_PASSWORD')
 EMAIL_USE_SSL = True
