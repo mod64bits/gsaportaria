@@ -16,7 +16,7 @@ class Parceiros(models.Model):
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["created_at"]
         verbose_name_plural = "Parceiros"
 
     def __str__(self):
