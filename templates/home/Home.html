@@ -184,7 +184,7 @@
                         <div class="icon"><i class="bx bx-file"></i></div>
                         <h4><a href="">Conservação</a></h4>
                         <p>
-                             Pensando no bem-estar dos nossos clientes, oferecemos diversas soluções em limpeza
+                            Pensando no bem-estar dos nossos clientes, oferecemos diversas soluções em limpeza
                             conservação empresarial,  urbana e predial, ajudando a
                             construir um amanhã mais sustentável.
                         </p>
@@ -213,7 +213,7 @@
             <div class="text-center">
                 <h3>TRABALHO DE EXCELÊNCIA</h3>
                 <p> Nós somos aquilo que fazemos repetidamente. Excelência, então, não é um modo de agir, mas um hábito.</p>
-                <a class="cta-btn" href="#">Contato</a>
+                <a class="cta-btn" href="#contact">Contato</a>
             </div>
 
         </div>
@@ -255,7 +255,7 @@
 
                             <a href="{% url 'servicos:servico_detalhe'  serv.servico.id%}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
 
-                                </div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -264,73 +264,37 @@
 
     <!-- ======= Pricing Section ======= -->
 
+    <section id="team" class="team">
+        <div class="container">
 
+            <div class="section-title">
+                <span>Parceiros</span>
+                <h2>Parceiros</h2>
+                <p>Nossos Parceiros</p>
+            </div>
 
-    {#    <section id="team" class="team">#}
-    {#      <div class="container">#}
-    {##}
-    {#        <div class="section-title">#}
-    {#          <span>Equipe</span>#}
-    {#          <h2>Equipe</h2>#}
-    {#          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>#}
-    {#        </div>#}
-    {##}
-    {#        <div class="row">#}
-    {#          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">#}
-    {#            <div class="member">#}
-    {#              <img src="assets/img/team/team-1.jpg" alt="">#}
-    {#              <h4>Walter White</h4>#}
-    {#              <span>Chief Executive Officer</span>#}
-    {#              <p>#}
-    {#                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut#}
-    {#              </p>#}
-    {#              <div class="social">#}
-    {#                <a href=""><i class="icofont-twitter"></i></a>#}
-    {#                <a href=""><i class="icofont-facebook"></i></a>#}
-    {#                <a href=""><i class="icofont-instagram"></i></a>#}
-    {#                <a href=""><i class="icofont-linkedin"></i></a>#}
-    {#              </div>#}
-    {#            </div>#}
-    {#          </div>#}
-    {##}
-    {#          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">#}
-    {#            <div class="member">#}
-    {#              <img src="assets/img/team/team-2.jpg" alt="">#}
-    {#              <h4>Sarah Jhinson</h4>#}
-    {#              <span>Product Manager</span>#}
-    {#              <p>#}
-    {#                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus#}
-    {#              </p>#}
-    {#              <div class="social">#}
-    {#                <a href=""><i class="icofont-twitter"></i></a>#}
-    {#                <a href=""><i class="icofont-facebook"></i></a>#}
-    {#                <a href=""><i class="icofont-instagram"></i></a>#}
-    {#                <a href=""><i class="icofont-linkedin"></i></a>#}
-    {#              </div>#}
-    {#            </div>#}
-    {#          </div>#}
-    {##}
-    {#          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">#}
-    {#            <div class="member">#}
-    {#              <img src="assets/img/team/team-3.jpg" alt="">#}
-    {#              <h4>William Anderson</h4>#}
-    {#              <span>CTO</span>#}
-    {#              <p>#}
-    {#                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara#}
-    {#              </p>#}
-    {#              <div class="social">#}
-    {#                <a href=""><i class="icofont-twitter"></i></a>#}
-    {#                <a href=""><i class="icofont-facebook"></i></a>#}
-    {#                <a href=""><i class="icofont-instagram"></i></a>#}
-    {#                <a href=""><i class="icofont-linkedin"></i></a>#}
-    {#              </div>#}
-    {#            </div>#}
-    {#          </div>#}
-    {##}
-    {#        </div>#}
-    {##}
-    {#      </div>#}
-    {#    </section>#}
+            <div class="row">
+                {% for parceiro in parceiros %}
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+                        <div class="member">
+                            <img src="{{ parceiro.logo.url }}" alt="">
+                            <h4>{{ parceiro.nome|upper }}</h4>
+                            <span>{{ parceiro.seguimento|upper }}</span>
+                            <p>
+                                {{ parceiro.resumo|upper }}
+                            </p>
+                            <div class="social">
+                                <a href="{{ parceiro.site }}"><i class="icofont-globe"></i></a>
+                                <a href="{{ parceiro.facebook }}"><i class="icofont-facebook"></i></a>
+                                <a href="{{ parceiro.instagram }}"><i class="icofont-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -377,7 +341,7 @@
                     <iframe class="mb-4 mb-lg-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.659759070915!2d-46.8978886857551!3d-22.740884337687692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8dea261af2eeb%3A0x2be1bb6064ff914d!2sAv.%20Papa%20Jo%C3%A3o%20XXIII%2C%2021%2C%20Pedreira%20-%20SP%2C%2013920-000!5e0!3m2!1spt-BR!2sbr!4v1631852590122!5m2!1spt-BR!2sbr" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
                 </div>
 
-               <div class="col-lg-6">
+                <div class="col-lg-6">
                     <form action="{% url 'home:contato' %}" method="post" role="form" class="php-email-form">{% csrf_token %}
                         <div class="form-row">
                             <div class="col-md-6 form-group">
@@ -387,7 +351,7 @@
                                 <div class="validate"></div>
                             </div>
                             <div class="col-md-6 form-group">
-                                 <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                                 {{ form.email.errors }}
                                 {{ form.email }}
                                 <div class="validate"></div>
@@ -395,19 +359,19 @@
 
                         </div>
                         <div class="form-group">
-                          <label for="{{ form.telefone.id_for_label }}">{{ form.telefone.label }}</label>
-                                {{ form.telefone.errors }}
-                                {{ form.telefone }}
+                            <label for="{{ form.telefone.id_for_label }}">{{ form.telefone.label }}</label>
+                            {{ form.telefone.errors }}
+                            {{ form.telefone }}
                         </div>
                         <div class="form-group">
-                           <label for="{{ form.assunto.id_for_label }}">{{ form.assunto.label }}</label>
-                                {{ form.assunto.errors }}
-                                {{ form.assunto }}
+                            <label for="{{ form.assunto.id_for_label }}">{{ form.assunto.label }}</label>
+                            {{ form.assunto.errors }}
+                            {{ form.assunto }}
                         </div>
                         <div class="form-group">
                             <label for="{{ form.mensagem.id_for_label }}">{{ form.mensagem.label }}</label>
-                                {{ form.mensagem.errors }}
-                                {{ form.mensagem }}
+                            {{ form.mensagem.errors }}
+                            {{ form.mensagem }}
                             <div class="validate"></div>
                         </div>
                         <div class="mb-3">
