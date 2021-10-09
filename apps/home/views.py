@@ -1,11 +1,13 @@
 from django.http import response
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.shortcuts import render
 from apps.contatos.forms import ContatoForm
 from django.views import View
 from django.core import mail
 from django.contrib import messages
 from apps.servicos.models import Servico, Categoria, Imagem
+from .models import Parceiros
 
 
 class HomeView(View):
@@ -14,6 +16,7 @@ class HomeView(View):
             "servicos": Imagem.objects.all(),
             "servicos_categorias": Categoria.objects.all(),
             "form": ContatoForm(),
+            "parceiros": Parceiros.objects.filter(ativo=True)
         }
         return render(request, 'home/Home.html', context)
 
@@ -28,7 +31,7 @@ class HomeView(View):
                 recipient_list=["contato@gsaportaria.com.br"],
             )
             messages.success(request, 'e-mail enviado com sucesso!')
-            return HttpResponseRedirect('/')
+            return redirect('/')
 
 
 
