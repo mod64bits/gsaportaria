@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from decouple import config
 from dj_database_url import parse as dburl
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,6 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['gsaportaria.com.br', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,11 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'widget_tweaks',
+    'rest_framework',
+
     'apps.servicos.templatetags',
 
     'apps.home',
     'apps.servicos',
     'apps.contatos',
+    'apps.empresas',
+    'apps.gerador_qrcode',
+    'apps.users',
+    'apps.apontamento',
 ]
 
 MIDDLEWARE = [
@@ -141,8 +150,7 @@ if not DEBUG:
 else:
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-    #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
-
+    # MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -151,9 +159,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # configuração de email
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_Host = config('EMAIL_Host')
 EMAIL_PORT = 465
 EMAIL_Host_USER = config('EMAIL_Host_USER')
 EMAIL_Host_PASSWORD = config('EMAIL_Host_PASSWORD')
 EMAIL_USE_SSL = True
+
+AUTH_USER_MODEL = 'users.User'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'apps.users.backends.ModelBackend',
+)
+LOGIN_REDIRECT_URL = '/apontamento/'

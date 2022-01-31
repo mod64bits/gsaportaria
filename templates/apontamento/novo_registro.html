@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      name="description"
+      content="Smart Device Camera Template for HTML, CSS, JS and WebRTC"
+    />
+    <meta name="keywords" content="HTML,CSS,JavaScript, WebRTC, Camera" />
+    <meta name="author" content="Kasper Kamperman" />
+    <title>Mobile First Camera Template</title>
+      <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="vid_container">
+        <video id="video" autoplay playsinline></video>
+        <div id="video_overlay"></div>
+      </div>
+      <div id="gui_controls">
+        <button
+          id="switchCameraButton"
+          name="switch Camera"
+          type="button"
+          aria-pressed="false"
+        ></button>
+        <button id="takePhotoButton" name="take Photo" type="button"></button>
+        <button
+          id="toggleFullScreenButton"
+          name="toggle FullScreen"
+          type="button"
+          aria-pressed="false"
+        ></button>
+      </div>
+    </div>
+    <form method="post" type="submit" id="form">
+        {% csrf_token %}
+        {{ form }}
+
+    </form>
+<script>
+        let scanner = new Instascan.Scanner(
+            {
+                video: document.getElementById('video')
+            }
+        );
+        scanner.addListener('scan', function(content) {
+            let empresa = content.split(',')[0]
+            let local = content.split(',')[1]
+            document.getElementById('id_empresa').value = empresa
+            document.getElementById('id_local').value = local
+            document.getElementById('form').submit()
+            console.log('Escaneou o conteudo: ' + empresa + local);
+
+        });
+        Instascan.Camera.getCameras().then(cameras =>
+        {
+            if(cameras.length > 0){
+                scanner.start(cameras[0]);
+            } else {
+                console.error("Não existe câmera no dispositivo!");
+            }
+        });
+    </script>
+  </body>
+</html>
