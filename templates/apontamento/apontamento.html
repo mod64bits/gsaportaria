@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+     <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Registros</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Meus Registros</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><a href="{% url 'apontamento:novo_registro' %}" class="btn btn-block btn-success btn-lg">Novo Registro</a></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">ID</th>
+                      <th>LOCAL</th>
+                      <th>DATA</th>
+                      <th>HORÁRIO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {% for registro in registros %}
+                    <tr>
+                      <td>{{ registro.id }}</td>
+                      <td>{{ registro.local }}</td>
+                      <td>{{ registro.created_at.date }}</td>
+                      <td><span class="badge bg-danger">{{ registro.created_at.time }}</span></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock content %}
+
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock script %}
