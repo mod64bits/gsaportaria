@@ -10,6 +10,7 @@ from apps.users.models import User
 
 class RegistroListaView(LoginRequiredMixin, ListView):
     model = Apontamento
+    paginate_by = 10
     context_object_name = 'registros'
     template_name = 'apontamento/apontamento.html'
     success_url = reverse_lazy('list_notes')

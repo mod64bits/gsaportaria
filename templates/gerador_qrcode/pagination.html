@@ -1,0 +1,9 @@
+<div class="card-footer">
+    <nav aria-label="Contacts Page Navigation">
+        <ul class="pagination justify-content-center m-0">
+            {% for page in paginator.page_range%}
+                <li class="page-item {% if page_obj.number == page%}active{% endif %}"><a class="page-link" href="?page={{ page }}{{ getvars }}">{{ page }}</a></li>
+             {% endfor %}
+        </ul>
+    </nav>
+</div>
