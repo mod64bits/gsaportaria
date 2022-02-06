@@ -21,6 +21,7 @@ class NovoQrCodeView(CreateView):
 
 class ListaQrCodeView(ListView):
     model = QrCode
+    paginate_by = 6
     context_object_name = 'qr_codes'
     template_name = 'gerador_qrcode/lista_qrcode.html'
 
