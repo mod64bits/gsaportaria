@@ -1,11 +1,11 @@
 from django.urls import reverse
 from django.views.generic import CreateView, ListView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import QrCode
 from .forms import NovoQrCodeForm
 
 
-class NovoQrCodeView(CreateView):
+class NovoQrCodeView(LoginRequiredMixin, CreateView):
     model = QrCode
     form_class = NovoQrCodeForm
     template_name = 'gerador_qrcode/novo_qrcode.html'
@@ -19,7 +19,7 @@ class NovoQrCodeView(CreateView):
         return context
 
 
-class ListaQrCodeView(ListView):
+class ListaQrCodeView(LoginRequiredMixin, ListView):
     model = QrCode
     paginate_by = 6
     context_object_name = 'qr_codes'

@@ -2,8 +2,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
-from .models import Apontamento, Empresa
+from django.views.generic import ListView, CreateView
+from .models import Apontamento, Empresa, ApontamentoLimpeza
 from .forms import ApontamentoForm
 from apps.users.models import User
 
@@ -46,3 +46,15 @@ class RegistroNovoView(LoginRequiredMixin, View):
         return redirect('apontamento:list_registro')
 
 
+class MeusApontamentosLimpesa(ListView):
+    model = ApontamentoLimpeza
+    paginate_by = 10
+    context_object_name = 'registros_limpeza'
+    template_name = 'apontamento/apontamento.html'
+    success_url = reverse_lazy('list_notes')
+    login_url = '/login/'
+    redirect_field_name = '/questonario/'
+
+    def get_queryset(self):
+        return ApontamentoLimpeza.objects.filter(
+            usuario_id=self.request.user.id)
