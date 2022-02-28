@@ -1,5 +1,8 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+
+from braces.views import PermissionRequiredMixin
 from django.views import View
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView
@@ -44,6 +47,18 @@ class RegistroNovoView(LoginRequiredMixin, View):
         )
 
         return redirect('apontamento:list_registro')
+
+
+class ListaRegistrosView(PermissionRequiredMixin, ListView):
+    model = Apontamento
+    template_name = 'apontamento/todos_apontamentos.html'
+    context_object_name = 'registros'
+    permission_required = 'global_permissions.colaboradores'
+
+
+
+    def get_queryset(self):
+        return Apontamento.objects.all().order_by('-created_at')
 
 
 class MeusApontamentosLimpesa(ListView):
