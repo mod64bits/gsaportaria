@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
     'rest_framework',
+    'global_permissions',
 
     'apps.servicos.templatetags',
 
@@ -166,9 +167,8 @@ EMAIL_Host_PASSWORD = config('EMAIL_Host_PASSWORD')
 EMAIL_USE_SSL = True
 
 AUTH_USER_MODEL = 'users.User'
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'apps.users.backends.ModelBackend',
 )
-LOGIN_REDIRECT_URL = '/apontamento/'
+LOGIN_REDIRECT_URL = '/apontamento/registros/'

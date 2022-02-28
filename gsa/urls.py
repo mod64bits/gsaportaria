@@ -16,8 +16,7 @@ urlpatterns = [
     path('qr/', include(qr_url)),
     path('dashboard/', include(ronda_urls)),
     path('servicos/',  include(servicos_urls)),
-    path('login/', LoginView.as_view(), name='login'),
-    path('logout', LogoutView.as_view(), name='logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('',  include(home_urls)),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
