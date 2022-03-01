@@ -17,8 +17,8 @@ class RegistroListaView(LoginRequiredMixin, ListView):
     context_object_name = 'registros'
     template_name = 'apontamento/apontamento.html'
     success_url = reverse_lazy('list_notes')
-    login_url = '/login/'
-    redirect_field_name = '/questonario/'
+    # login_url = '/login/'
+    # redirect_field_name = '/apontamento/registros/'
 
     def get_queryset(self):
         return Apontamento.objects.filter(usuario_id=self.request.user.id)
