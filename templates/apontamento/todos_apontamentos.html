@@ -57,7 +57,7 @@
                                             <td>{{ registro.usuario }}</td>
                                             <td>{{ registro.empresa }}</td>
                                             <td>{{ registro.local }}</td>
-                                            <td>{{ registro.created_at.date }}</td>
+                                            <td>{{ registro.created_at.date|date:'d-m-Y' }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -108,18 +108,13 @@
     <script>
         $(function () {
             $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language":{"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"},
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+
         });
     </script>
 {% endblock script %}
