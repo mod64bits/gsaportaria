@@ -2,7 +2,7 @@ from django.views.generic import CreateView, UpdateView, FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
-from apps.profiles.forms import ProfileForm
+
 
 
 
@@ -21,19 +21,19 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('login')
 
 
-class UpdateUserView(LoginRequiredMixin, UpdateView):
-
-    model = User
-    fields = ['username', 'name', 'email']
-    template_name = 'users/update_user.html'
-    success_url = reverse_lazy('users:user_home')
-
-    def get_object(self):
-        return self.request.user
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['profileForm'] = ProfileForm
+# class UpdateUserView(LoginRequiredMixin, UpdateView):
+#
+#     model = User
+#     fields = ['username', 'name', 'email']
+#     template_name = 'users/update_user.html'
+#     success_url = reverse_lazy('users:user_home')
+#
+#     def get_object(self):
+#         return self.request.user
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['profileForm'] = ProfileForm
 
 
 
