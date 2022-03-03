@@ -132,9 +132,9 @@ LANGUAGE_CODE = 'pt-br'
 DATE_INPUT_FORMATS = '%d-%m-%Y'
 TIME_INPUT_FORMATS = ['%H:%M:%S']
 
-TIME_ZONE = 'America/Cuiaba'
+TIME_ZONE = 'America/Sao_Paulo'
 
-USE_I18N = False
+USE_I18N = True
 
 USE_TZ = False
 
