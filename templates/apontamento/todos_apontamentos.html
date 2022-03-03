@@ -51,7 +51,7 @@
                       <td>{{ registro.usuario.username}}</td>
                       <td>{{ registro.local }}</td>
                       <td>{{ registro.empresa }}</td>
-                      <td>{{ registro.created_at.date }}</td>
+                      <td>{{ registro.created_at.date |date:"d-m-Y" }}</td>
                       <td><span class="badge bg-danger">{{ registro.created_at.time }}</span></td>
                     </tr>
                   {% endfor %}

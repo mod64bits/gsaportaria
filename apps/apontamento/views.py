@@ -51,7 +51,7 @@ class RegistroNovoView(LoginRequiredMixin, View):
 
 class ListaRegistrosView(PermissionRequiredMixin, ListView):
     model = Apontamento
-    paginate_by = 25
+    paginate_by = 15
     template_name = 'apontamento/todos_apontamentos.html'
     context_object_name = 'registros'
     permission_required = 'global_permissions.colaboradores'
