@@ -1,125 +1,70 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'ronda/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ronda/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
-    <link rel="stylesheet" href="{% static 'ronda/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
 
-{% endblock css %}
 
 {% block titulo_pagina %}GSA::Todos Registros{% endblock %}
 
 {% block content %}
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Lista de Registros</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Registros</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Registros</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Todos os Registros</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Lista de Registros</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Hora</th>
-                                        <th>Usuario</th>
-                                        <th>Empresa</th>
-                                        <th>Local</th>
-                                        <th>Data</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for registro in registros %}
-                                        <tr>
-                                            <td>{{ registro.created_at.time }}</td>
-                                            <td>{{ registro.usuario }}</td>
-                                            <td>{{ registro.empresa }}</td>
-                                            <td>{{ registro.local }}</td>
-                                            <td>{{ registro.created_at.date|date:'d-m-Y' }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Hora</th>
-                                        <th>Usuario</th>
-                                        <th>Local</th>
-                                        <th>Data</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"><a href="{% url 'apontamento:novo_registro' %}" class="btn btn-block btn-success btn-lg">Novo Registro</a></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Usuário</th>
+                      <th>LOCAL</th>
+                      <th>Empresa</th>
+                      <th>DATA</th>
+                      <th>HORÁRIO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {% for registro in registros %}
+                    <tr>
+                      <td>{{ registro.usuario.username}}</td>
+                      <td>{{ registro.local }}</td>
+                      <td>{{ registro.empresa }}</td>
+                      <td>{{ registro.created_at.date }}</td>
+                      <td><span class="badge bg-danger">{{ registro.created_at.time }}</span></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+             {% include 'gerador_qrcode/pagination.html' %}
             </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 {% endblock content %}
 
-{% block script %}
-    <script src="{% static 'ronda/plugins/jquery/jquery.min.js' %}"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'ronda/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- JavaScript do Bootstrap compilado e minimizado -->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="{% static 'ronda/plugins/datatables/jquery.dataTables.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-responsive/js/responsive.bootstrap4.min.j' %}s"></script>
-<script src="{% static 'ronda/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/jszip/jszip.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/pdfmake/pdfmake.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/pdfmake/vfs_fonts.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
-<script src="{% static 'ronda/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
-<!-- AdminLTE App -->
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-                "dom": "Bfrtip",
-                "ordering": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "language":{"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"},
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-        });
-    </script>
-{% endblock script %}
