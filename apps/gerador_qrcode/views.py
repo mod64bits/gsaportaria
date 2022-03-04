@@ -1,6 +1,7 @@
 from django.urls import reverse
+from django.urls import reverse_lazy
 from braces.views import PermissionRequiredMixin
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
 from .models import QrCode
 from .forms import NovoQrCodeForm
 
@@ -29,3 +30,19 @@ class ListaQrCodeView(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         return QrCode.objects.all().order_by('-created_at')
+
+
+class DetalheQrCodeView(DetailView):
+    model = QrCode
+    template_name = 'gerador_qrcode/detalhe.html'
+
+
+class ImprimirQrCodeView(DetailView):
+    model = QrCode
+    template_name = 'gerador_qrcode/imprimir.html'
+
+
+class DeleteQrCodeView(DeleteView):
+    model = QrCode
+    success_url = reverse_lazy('qrcode:lista_qr')
+

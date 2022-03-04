@@ -1,10 +1,9 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block css %}
-
-
-{% endblock css %}
+{% block titulo %}
+    GSA::Lista de QrCode
+{% endblock titulo %}
 
 {% block content %}
     <div class="content-wrapper">
@@ -22,13 +21,9 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
-
-        <!-- Main content -->
         <section class="content">
-
-            <!-- Default box -->
             <div class="card card-solid">
                 <div class="card-body pb-0">
                     <div class="row">
@@ -43,10 +38,6 @@
                                             <div class="col-7">
                                                 <h2 class="lead"><b>{{ qrcode.created_at }}</b></h2>
                                                 <p class="text-muted text-sm"><b>Local: </b> {{ qrcode.local }} </p>
-                                                {#                      <ul class="ml-4 mb-0 fa-ul text-muted">#}
-                                                {#                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>#}
-                                                {#                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>#}
-                                                {#                      </ul>#}
                                             </div>
                                             <div class="col-5 text-center">
                                                 <img src="{{ qrcode.qr_code.url }}" alt="{{ qrcode.empresa.nome }}" class="img-rounded img-fluid">
@@ -55,10 +46,10 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="text-right">
-                                            <a href="#" class="btn btn-sm bg-teal">
-                                                <i class="fas fa-comments"></i>
+                                            <a href="{% url 'qrcode:delete_qr' qrcode.id %}" class="btn btn-sm bg-danger">
+                                                <i class="fas fa-trash"></i>
                                             </a>
-                                            <a href="{{ qrcode.qr_code.url }}" class="btn btn-sm btn-primary">
+                                            <a href="{% url 'qrcode:detalhe_qr' qrcode.id %}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-user"></i> Imprimir
                                             </a>
                                         </div>
@@ -76,7 +67,5 @@
 {% endblock content %}
 
 {% block script %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- JavaScript do Bootstrap compilado e minimizado -->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 {% endblock script %}
