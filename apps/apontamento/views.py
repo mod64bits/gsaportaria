@@ -19,7 +19,6 @@ class RegistroListaView(LoginRequiredMixin, ListView):
     context_object_name = 'registros'
     template_name = 'apontamento/apontamento.html'
     success_url = reverse_lazy('list_notes')
-
     # login_url = '/login/'
     # redirect_field_name = '/apontamento/registros/'
 
@@ -53,8 +52,7 @@ class RegistroNovoView(LoginRequiredMixin, View):
             local=local
         )
 
-        return redirect(reverse_lazy('apontamento:list_registro', {
-            'messages': "Apontamento Efetuado com Sucesso!"}))
+        return redirect('apontamento:list_registro')
 
 
 class ListaRegistrosView(PermissionRequiredMixin, ListView):
@@ -63,6 +61,8 @@ class ListaRegistrosView(PermissionRequiredMixin, ListView):
     template_name = 'apontamento/todos_apontamentos.html'
     context_object_name = 'registros'
     permission_required = 'global_permissions.colaboradores'
+
+
 
     def get_queryset(self):
         return Apontamento.objects.all().order_by('-created_at')
