@@ -52,9 +52,9 @@ class RegistroNovoView(LoginRequiredMixin, View):
             local=local
         )
 
-        return redirect('apontamento:list_registro', {
+        return redirect(reverse_lazy('apontamento:list_registro', {
             'message': messages.success(
-                self.request, 'Qr Code Criado com Sucesso')})
+                self.request, 'Qr Code Criado com Sucesso')}))
 
 
 class ListaRegistrosView(PermissionRequiredMixin, ListView):
