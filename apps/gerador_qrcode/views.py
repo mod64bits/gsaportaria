@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.contrib import messages
 from django.urls import reverse_lazy
 from braces.views import PermissionRequiredMixin
 from django.views.generic import CreateView, ListView, DetailView, DeleteView
@@ -13,7 +14,10 @@ class NovoQrCodeView(PermissionRequiredMixin, CreateView):
     permission_required = 'global_permissions.colaboradores'
 
     def get_success_url(self):
+        messages.success(self.request, 'Qr Code Criado com Sucesso')
         return reverse('qrcode:lista_qr')
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,10 +30,17 @@ class ListaQrCodeView(PermissionRequiredMixin, ListView):
     paginate_by = 6
     context_object_name = 'qr_codes'
     template_name = 'gerador_qrcode/lista_qrcode.html'
+    success_message = "%(local)s criado com sucesso"
     permission_required = 'global_permissions.colaboradores'
 
     def get_queryset(self):
         return QrCode.objects.all().order_by('-created_at')
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            local=self.object.local,
+        )
 
 
 class DetalheQrCodeView(DetailView):

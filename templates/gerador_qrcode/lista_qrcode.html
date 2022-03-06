@@ -4,6 +4,13 @@
 {% block titulo %}
     GSA::Lista de QrCode
 {% endblock titulo %}
+{% block css %}
+<script src="{% static 'ronda/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'ronda/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'ronda/plugins/toastr/toastr.min.js' %}"></script>
+
+
+{% endblock %}
 
 {% block content %}
     <div class="content-wrapper">
@@ -13,6 +20,29 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Qr Codes</h1>
+{#                        {% if messages %}#}
+{#                            {% for message in messages %}#}
+{#                                <script type="text/javascript">#}
+{#                                 $(function (){#}
+{#                                    $.toast({#}
+{#                                        text : "Let's test some HTML stuff... <a href='#'>github</a>",#}
+{#                                        showHideTransition : 'slide',  // It can be plain, fade or slide#}
+{#                                        bgColor : 'blue',              // Background color for toast#}
+{#                                        textColor : '#eee',            // text color#}
+{#                                        allowToastClose : false,       // Show the close button or not#}
+{#                                        hideAfter : 5000,              // `false` to make it sticky or time in miliseconds to hide after#}
+{#                                        stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once#}
+{#                                        textAlign : 'left',            // Alignment of text i.e. left, right, center#}
+{#                                        position : 'bottom-left'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page#}
+{#                                    })#}
+{#                                     })#}
+{#                                </script>#}
+{#                                <div class="text-center alert alert-{{ message.tags }}">#}
+{#                                    {{ message|safe }}#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        {% endif %}#}
+
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -66,6 +96,25 @@
     </div>
 {% endblock content %}
 
-{% block script %}
+{% block scripts %}
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                $(function() {
+                    $(document).Toasts('create', {
+                        closeButton: true,
+                        class: 'bg-success',
+                        title: 'Criação Qr Code',
+                        progressBar: true,
+                        hideAfter: 10000,
+                        autohide: true,
+                        delay: 950,
+                        body: '{{ message }}'
+                    })
+                });
+    {% endfor %}
+        {% endif %}
+</script>
+{% endblock scripts %}
 
-{% endblock script %}
+
