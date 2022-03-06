@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages_constants
 from decouple import config
 from dj_database_url import parse as dburl
 
@@ -29,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['www.gsaportaria.com.br', 'gsaportaria.com.br', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www.gsaportaria.com.br', 'gsaportaria.com.br', 'localhost', '127.0.0.1', '0.0.0.0', '172.16.1.9']
 # ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -174,3 +175,12 @@ AUTHENTICATION_BACKENDS = (
     'apps.users.backends.ModelBackend',
 )
 LOGIN_REDIRECT_URL = '/apontamento/registros/'
+
+
+MESSAGE_TAGS = {
+    messages_constants.DEBUG: 'debug',
+    messages_constants.INFO: 'info',
+    messages_constants.SUCCESS: 'success',
+    messages_constants.WARNING: 'warning',
+    messages_constants.ERROR: 'danger',
+}

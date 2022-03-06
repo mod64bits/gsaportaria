@@ -1,5 +1,7 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
+from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 
 from braces.views import PermissionRequiredMixin
@@ -30,6 +32,10 @@ class RegistroNovoView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
     template_name = 'apontamento/novo_registro.html'
 
+    def get_success_url(self):
+        messages.success(self.request, 'Qr Code Criado com Sucesso')
+        return reverse('qrcode:lista_qr')
+
     def get(self, request):
         context = {
             'form': self.form_class
@@ -46,7 +52,7 @@ class RegistroNovoView(LoginRequiredMixin, View):
             local=local
         )
 
-        return redirect('apontamento:list_registro')
+        return self.get_success_url()
 
 
 class ListaRegistrosView(PermissionRequiredMixin, ListView):
