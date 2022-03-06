@@ -52,7 +52,9 @@ class RegistroNovoView(LoginRequiredMixin, View):
             local=local
         )
 
-        return self.get_success_url()
+        return redirect('apontamento:list_registro', {
+            'message': messages.success(
+                self.request, 'Qr Code Criado com Sucesso')})
 
 
 class ListaRegistrosView(PermissionRequiredMixin, ListView):
