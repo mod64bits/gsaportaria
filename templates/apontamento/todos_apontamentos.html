@@ -1,70 +1,190 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'ronda/plugins/daterangepicker/daterangepicker.css' %}">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css' %}">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'ronda/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css' %}">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/bs-stepper/css/bs-stepper.min.css' %}">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="{% static 'ronda/plugins/dropzone/min/dropzone.min.css' %}">
+{% endblock css %}
 
 
 {% block titulo %}GSA::Todos Registros{% endblock %}
 
 {% block content %}
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Registros</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Todos os Registros</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title"><a href="{% url 'apontamento:novo_registro' %}" class="btn btn-block btn-success btn-lg">Novo Registro</a></h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Usuário</th>
-                      <th>LOCAL</th>
-                      <th>Empresa</th>
-                      <th>DATA</th>
-                      <th>HORÁRIO</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                   {% for registro in registros %}
-                    <tr>
-                      <td>{{ registro.usuario.username}}</td>
-                      <td>{{ registro.local }}</td>
-                      <td>{{ registro.empresa }}</td>
-                      <td>{{ registro.created_at.date |date:"d-m-Y" }}</td>
-                      <td><span class="badge bg-danger">{{ registro.created_at.time }}</span></td>
-                    </tr>
-                  {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-             {% include 'gerador_qrcode/pagination.html' %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Registros</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Todos os Registros</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Apontamentos</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Usuário</th>
+                                        <th>LOCAL</th>
+                                        <th>Empresa</th>
+                                        <th>DATA</th>
+                                        <th>HORÁRIO</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for registro in registros %}
+                                        <tr>
+                                            <td>{{ registro.usuario.username}}</td>
+                                            <td>{{ registro.local }}</td>
+                                            <td>{{ registro.empresa }}</td>
+                                            <td>{{ registro.created_at.date |date:"d-m-Y" }}</td>
+                                            <td><span class="badge bg-danger">{{ registro.created_at.time }}</span></td>
+                                        </tr>
+                                    {% empty %}
+                                        <div class="alert alert-warning alert-dismissible">
+
+                                            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                                            Não Foram Encontrado Dados.
+                                        </div>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                            {% include 'gerador_qrcode/pagination.html' %}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <form action="">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Buscar de Apontamentos</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Usuário</label>
+                                        <select class="form-control select2bs4" name="select_usuarios" style="width: 100%;">
+                                            <option selected="selected">Selecione o Usuário</option>
+                                           {% for usuario in usuarios %}
+                                            <option>{{ usuario }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Data Inicio:</label>
+                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" name="data" data-target="#reservationdate"/>
+                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Data Fim:</label>
+                                        <div class="input-group date" id="reservationdate_fim" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" name="data_fim" data-target="#reservationdate_fim"/>
+                                            <div class="input-group-append" data-target="#reservationdate_fim" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ultimos Apontamentos</label>
+                                        <select class="form-control select2bs4" name="dias" style="width: 100%;">
+                                            <option selected="selected">Selecione range de dias</option>
+                                            {% for usuario in usuarios %}
+                                            <option>7</option>
+                                            {% endfor %}
+                                            <option>15</option>
+                                            <option>30</option>
+                                            <option>60</option>
+                                            <option>360</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i> Pesquisar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock content %}
+{% block scripts %}
+    <script src="{% static 'ronda/plugins/select2/js/select2.full.min.js' %}"></script>
+    <!-- Bootstrap4 Duallistbox -->
+
+    <!-- InputMask -->
+    <script src="{% static 'ronda/plugins/moment/moment.min.js'%}"></script>
+    <script src="{% static 'ronda/plugins/inputmask/jquery.inputmask.min.js' %}"></script>
+    <!-- date-range-picker -->
+    <script src="{% static 'ronda/plugins/daterangepicker/daterangepicker.js' %}"></script>
+    <!-- bootstrap color picker -->
+    <script src="{% static 'ronda/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' %}"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="{% static 'ronda/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <script src="{% static 'ronda/plugins/dropzone/min/dropzone.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'ronda/dist/js/adminlte.min.js' %}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{% static 'ronda/dist/js/demo.js' %}"></script>
+
+    <script>
+        $(function () {
+            $('.select2').select2()
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+
+            });
+             $('#reservationdate_fim').datetimepicker({
+                format: 'L'
+
+            });
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+        })
+
+    </script>
+{% endblock scripts %}
 
