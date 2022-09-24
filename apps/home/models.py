@@ -1,24 +1,38 @@
 from django.db import models
-import uuid
+from apps.base.models import BaseModelUUID
 
 
-class Parceiros(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class Parceiros(BaseModelUUID):
     ativo = models.BooleanField('Ativo?', default=True)
     nome = models.CharField('Nome', max_length=100)
-    seguimento = models.CharField('Seguimento', max_length=100)
-    resumo = models.TextField('Resumo')
     logo = models.ImageField('Logo', upload_to='parceiros', default='media/parceiro.jpg')
-    site = models.CharField('Site', max_length=150, null=True, blank=True, default='#')
-    facebook = models.CharField('Facebook', max_length=150, null=True, blank=True, default='#')
-    instagram = models.CharField('Instagram', max_length=150, null=True, blank=True, default='#')
-    created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         ordering = ["created_at"]
         verbose_name_plural = "Parceiros"
 
     def __str__(self):
-        return f"Nome: {self.nome} Seguimento: {self.seguimento}"
+        return self.nome
 
+
+class Solucoes(BaseModelUUID):
+    nome = models.CharField('Solução', max_length=50)
+    icone = models.ImageField(upload_to='solucoes/imagens')
+    descricao = models.TextField('Soluções')
+
+    def __str__(self):
+        return self.nome
+
+
+class InformacoesDoSite(BaseModelUUID):
+    nome = models.CharField('Nome do Site', max_length=25)
+    telefone = models.CharField('Telefone', max_length=30)
+    email = models.EmailField('e-mail')
+    endereco = models.CharField('Endereço', max_length=200)
+    facebook = models.URLField('Facebook', null=True, blank=True)
+    instagram = models.URLField('Facebook', null=True, blank=True)
+    sobre = models.TextField('Sobre', null=True, blank=True)
+    escolha = models.TextField('Porque escolher-nos', null=True, blank=True)
+
+    def __str__(self):
+        return self.nome

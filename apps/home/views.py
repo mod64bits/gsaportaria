@@ -1,38 +1,55 @@
-from django.http import response
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
-from django.shortcuts import render
-from apps.contatos.forms import ContatoForm
-from django.views import View
-from django.core import mail
-from django.contrib import messages
-from apps.servicos.models import Servico, Categoria, Imagem
+from django.views.generic.base import TemplateView
+from apps.servicos.models import Servico, ServicosDestaques, Categoria
 from .models import Parceiros
 
 
-class HomeView(View):
-    def get(self, request, *args, **kwargs):
-        context = {
-            "servicos": Imagem.objects.all(),
-            "servicos_categorias": Categoria.objects.all(),
-            "form": ContatoForm(),
-            "parceiros": Parceiros.objects.filter(ativo=True)
-        }
-        return render(request, 'home/Home.html', context)
+class HomeView(TemplateView):
+    template_name = 'home/Home.html'
 
-    def post(self, request, *args, **kwargs):
-        form = ContatoForm(request.POST)
-        body = "Olá  sua mensagem foi recebida em breve retornaremos o contato."
-        if form.is_valid():
-            mail.send_mail(
-                subject="Menssagem enviada com sucesso",
-                message=body,
-                from_email="contato@gsaportaria.com.br",
-                recipient_list=["contato@gsaportaria.com.br"],
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['carousels_home'] = self.get_carousel()
+        context['destaques'] = self.get_destaques()
+        context['servicos_home'] = self.get_servicos_home()
+        context['parceiros'] = Parceiros.objects.filter(ativo=True)
+        return context
+
+    def get_carousel(self):
+        return Servico.objects.filter(slider=True)
+
+    def get_destaques(self):
+        destaques = ServicosDestaques.objects.all()
+        cont = 1
+        dados = []
+
+        for item in destaques:
+            dados.append(
+                {
+                    "nome": item.nome,
+                    "icone": item.icone,
+                    "descricao": item.descricao,
+                    "style_time": f"0.{cont}s",
+                    "numero": cont
+                }
             )
-            messages.success(request, 'e-mail enviado com sucesso!')
-            return redirect('/')
+            cont += 1
 
+        return dados
 
+    def get_servicos_home(self):
+        servicos_home = Servico.objects.filter(ativo=True)[:9]
+        cont = 1
+        dados = []
 
+        for item in servicos_home:
+            dados.append({
+                "id": item.id,
+                "nome": item.titulo,
+                "imagem": item.imagem,
+                "categoria": item.categoria,
+                "descricao": item.descricao,
+                "time": f"0.{cont}s"
+            })
+            cont += 1
 
+        return dados

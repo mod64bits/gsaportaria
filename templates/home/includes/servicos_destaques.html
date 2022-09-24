@@ -1,0 +1,23 @@
+{% load static %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-4">
+            {% for destaque in destaques %}
+                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="{{ destaque.style_time }}">
+                    <div class="h-100 bg-dark p-4 p-xl-5">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="btn-square rounded-circle"
+                                 style="width: 64px; height: 64px; background: #000000;">
+                                <img class="img-fluid" src="{{ destaque.icone.url }}" alt="Icon">
+                            </div>
+                            <h1 class="display-1 mb-0" style="color: #000000;">{{ destaque.numero }}</h1>
+                        </div>
+                        <h5 class="text-white">{{ destaque.nome }}</h5>
+                        <hr class="w-25">
+                        <span>{{ destaque.descricao }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
