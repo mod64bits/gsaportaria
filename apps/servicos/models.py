@@ -1,32 +1,39 @@
 from django.db import models
 import uuid
+from django.urls import reverse
+from apps.base.models import BaseModelSlug, BaseModelUUID
+from apps.core.signals import create_slug
+from django.db.models import signals
 
 
-class Categoria(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    titulo = models.CharField('Categoria', max_length=30)
-    created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+class Categoria(BaseModelSlug):
+    nome = models.CharField('Categoria', max_length=30)
+    slug_from = 'nome'
 
     def __str__(self):
-        return self.titulo
+        return self.nome
+
+    def get_absolute_url(self):
+        return reverse('catalog:category', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ["-created_at"]
         verbose_name_plural = "Categorias"
 
 
-class Servico(models.Model):
+class Servico(BaseModelSlug):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     titulo = models.CharField('Servico', max_length=150)
-    capa = models.ImageField(upload_to='servicos/imagens', default='servico_padrao.jpg')
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='cat_servico')
+    imagem = models.ImageField(upload_to='servicos/imagens', default='media/servico_padrao.jpg')
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='cat_servicos')
+    ativo = models.BooleanField('Ativo', default=True)
+    slider = models.BooleanField('Slider', default=False)
     descricao = models.TextField('Descrição')
-    created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    slug_from = 'titulo'
 
     def __str__(self):
-        return self.titulo
+        return self.titulo.title()
 
     class Meta:
         ordering = ["-created_at"]
@@ -37,6 +44,8 @@ class Imagem(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     titulo = models.CharField('Imagem nome', max_length=15)
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='img_servico')
+    ativo = models.BooleanField('Ativo', default=True)
+    slider = models.BooleanField('Ativo', default=False)
     imagem = models.ImageField(null=True, blank=True, upload_to='galeria/original')
     created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
@@ -48,8 +57,15 @@ class Imagem(models.Model):
         ordering = ["-created_at"]
         verbose_name_plural = "Imagens"
 
-    # def save(self, *args, **kwargs):
-    #     if self.image:
-    #         small = rescale_image(self.image, width=100, height=100)
-    #         self.image_small = SimpleUploadedFile(name, small_pic)
-    #     super(Model, self).save(*args, **kwargs)
+
+class ServicosDestaques(BaseModelUUID):
+    nome = models.CharField('Servico', max_length=50)
+    icone = models.ImageField(upload_to='servicos/imagens')
+    descricao = models.TextField('Descrição')
+
+    def __str__(self):
+        return self.nome
+
+
+signals.post_save.connect(create_slug, sender=Categoria)
+signals.post_save.connect(create_slug, sender=Servico)

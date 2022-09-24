@@ -1,0 +1,56 @@
+{% load static %}
+
+<div class="container-fluid p-0 pb-5">
+    <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="{% static 'home/img/banner_gsa.png' %}" alt="">
+            <div class="carousel-inner">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-8 text-center">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">GSA
+                                Portaria e
+                                Serviços</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">Terceirização de Serviços</p>
+                            <a href=""
+                               class="btn btn-primary rounded-pill py-md-3 px-md-5 me-3 animated slideInLeft">Orçamento
+                            </a>
+                            <a href="" class="btn btn-light rounded-pill py-md-3 px-md-5 animated slideInRight">Contato
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for carousel_h in carousels_home %}
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{{ carousel_h.imagem.url }}" alt="">
+                <div class="carousel-inner">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-lg-8 text-center">
+                                <h1 class="display-3 text-white animated slideInDown mb-4">{{ carousel_h.titulo }}</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">{{ carousel_h.descricao }}</p>
+                                <a href=""
+                                   class="btn btn-primary rounded-pill py-md-3 px-md-5 me-3 animated slideInLeft">Orçamento</a>
+                                <a href="" class="btn btn-light rounded-pill py-md-3 px-md-5 animated slideInRight">Saber
+                                    Mais</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

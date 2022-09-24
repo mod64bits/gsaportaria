@@ -21,7 +21,7 @@ class AdminCategoria(ModelAdmin):
     search_fields = ('titulo',)
 
 
-class AdminServico(ModelAdmin):
+class ServicoAdmin(ModelAdmin):
     list_display = ('titulo', 'created_at',)
     list_filter = ('titulo',)
     search_fields = ('titulo',)
@@ -38,6 +38,6 @@ class AdminImagem(ModelAdmin):
 
 
 
-admin.site.register(Servico, AdminServico)
+admin.site.register(Servico, ServicoAdmin)
 admin.site.register(Imagem)
 admin.site.register(Categoria)

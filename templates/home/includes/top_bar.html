@@ -1,13 +1,32 @@
-<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
-    <div class="container d-flex">
-        <div class="contact-info mr-auto">
-            <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">gilsimar@gsaportaria.com.br</a>
-            <i class="icofont-phone"></i> (19) 99345-6524
+<div class="container-fluid bg-dark px-5">
+    <div class="row gx-4 d-none d-lg-flex">
+        <div class="col-lg-6 text-start">
+            <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                <div class="btn-sm-square rounded-circle bg-primary me-2">
+                    <small class="fa fa-map-marker-alt text-white"></small>
+                </div>
+                <small>{{ site_infor.endereco }}</small>
+            </div>
+            <div class="h-100 d-inline-flex align-items-center py-3">
+                <div class="btn-sm-square rounded-circle bg-primary me-2">
+                    <small class="fa fa-envelope-open text-white"></small>
+                </div>
+                <small>{{ site_infor.email }}</small>
+            </div>
         </div>
-        <div class="social-links">
-            <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-            <a href="https://www.facebook.com/Gsaservicoseportaria" class="facebook"><i class="icofont-facebook"></i></a>
-            <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+        <div class="col-lg-6 text-end">
+            <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                <div class="btn-sm-square rounded-circle bg-primary me-2">
+                    <small class="fa fa-phone-alt text-white"></small>
+                </div>
+                <small>{{ site_infor.telefone }}</small>
+            </div>
+            <div class="h-100 d-inline-flex align-items-center py-3">
+                <div class="btn-sm-square rounded-circle bg-primary me-2">
+                    <small class="far fa-clock text-white"></small>
+                </div>
+                <small>24 h</small>
+            </div>
         </div>
     </div>
 </div>
