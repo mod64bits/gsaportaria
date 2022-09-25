@@ -11,16 +11,17 @@ class ContatoForm(forms.ModelForm):
                                                  widget=forms.Select(choices=self.get_servicos()))
 
     def get_servicos(self):
-        items = Servico.objects.filter(ativo=True).values('nome')
-
+        items = Servico.objects.filter(ativo=True).values('titulo')
         choice = []
-
         for item in items:
-            choice.append((item, item.title()))
-
+            choice.append(
+                (item['titulo'].replace(' ', '').capitalize(), item['titulo'].title()))
         return choice
+
+    def send_email(self):
+        # send email using the self.cleaned_data dictionary
+        pass
 
     class Meta:
         model = Contato
         fields = '__all__'
-

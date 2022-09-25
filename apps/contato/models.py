@@ -4,8 +4,8 @@ from apps.servicos.models import Servico
 
 
 class Contato(BaseModelSlug):
-    nome = models.CharField('Nome', max_length=60),
-    whatsapp = models.CharField('Whatsapp')
+    nome = models.CharField('Nome', max_length=60)
+    whatsapp = models.CharField('Whatsapp', max_length=20)
     email = models.EmailField('E-mail')
     servico = models.CharField(Servico, max_length=30)
     mensagem = models.TextField('Mensagem')

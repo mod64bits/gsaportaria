@@ -7,11 +7,13 @@ from apps.servicos import urls as servicos_urls
 from apps.ronda import urls as ronda_urls
 from apps.gerador_qrcode import urls as qr_url
 from apps.apontamento import urls as apontamento_url
+from apps.contato import urls as contato_url
 
 from django.conf import settings
 
 
 urlpatterns = [
+    path('contato/', include(contato_url)),
     path('apontamento/', include(apontamento_url)),
     path('qr/', include(qr_url)),
     path('dashboard/', include(ronda_urls)),
