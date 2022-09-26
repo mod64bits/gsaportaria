@@ -29,12 +29,12 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rest_framework',
     'global_permissions',
+    'captcha',
 
     'apps.servicos.templatetags',
 
     'apps.home',
     'apps.servicos',
-    'apps.contatos',
     'apps.empresas',
     'apps.gerador_qrcode',
     'apps.users',
@@ -149,12 +149,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # configuração de email
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_Host = config('EMAIL_Host')
-EMAIL_PORT = 465
-EMAIL_Host_USER = config('EMAIL_Host_USER')
-EMAIL_Host_PASSWORD = config('EMAIL_Host_PASSWORD')
-EMAIL_USE_SSL = True
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_Host')
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = config('EMAIL_Host_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_Host_PASSWORD')
+EMAIL_USE_SSL = False
+
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = (
