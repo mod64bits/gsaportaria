@@ -5,8 +5,6 @@ from apps.empresas.models import Empresa
 
 
 class ApontamentoBase(models.Model):
-
-
     local = models.CharField('Local', max_length=100)
     created_at = models.DateTimeField('Cadastrado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.gerador_qrcode',
     'apps.users',
     'apps.apontamento',
+    'apps.contato',
 ]
 
 MIDDLEWARE = [
