@@ -46,7 +46,7 @@
                                     <div class="col-12">
                                         <div class="form-floating">
                                             {% render_field form.mensagem|append_attr:"class:form-control"|append_attr:"cols:50"|append_attr:"rows:50" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" %}
-                                            <label for="message">Message</label>
+                                            <label for="message">Mensagem</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -68,6 +68,11 @@
                                                     Desejo Receber notificações dos serviços por email
 
                                                 </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class=" form-check">
+                                                {% render_field form.captcha %}
                                             </div>
                                         </div>
                                         <button class="btn btn-primary w-100 py-3" type="submit">Enviar Mensagem

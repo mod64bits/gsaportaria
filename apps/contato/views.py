@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from .forms import ContatoForm
 from .models import Contato
 
@@ -17,7 +18,18 @@ class ContatoFormView(SuccessMessageMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.send_email()
+        subject = form.cleaned_data.get('departamento')
+        nome = form.cleaned_data.get('nome')
+        email = form.cleaned_data.get('email')
+        whatsapp = form.cleaned_data.get('whatsapp')
+        mensagem_form = form.cleaned_data.get('mensagem')
+        mensagem = f"Nome: {nome}, WhatsApp: {whatsapp}, Mensagem: {mensagem_form}, email: {email}"
+        send_mail(
+            subject,
+            mensagem,
+            'contato@gsaportaria.com.br',
+            ['gilsimar@gsaportaria.com.br'],
+            fail_silently=False,
+
+        )
         return super().form_valid(form)
