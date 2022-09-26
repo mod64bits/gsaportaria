@@ -1,14 +1,12 @@
 from django import forms
 from .models import Contato, Departamento
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Invisible
 
 
 class ContatoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ContatoForm, self).__init__(*args, **kwargs)
 
-        self.fields['captcha'] = ReCaptchaField(widget=ReCaptchaV2Invisible)
+
         self.fields['departamento'] = forms.CharField(label="Departamento", max_length=30,
                                                       widget=forms.Select(choices=self.get_servicos()))
 
