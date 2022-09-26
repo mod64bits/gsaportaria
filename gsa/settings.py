@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rest_framework',
     'global_permissions',
-    'captcha',
 
     'apps.servicos.templatetags',
 
@@ -157,9 +156,6 @@ EMAIL_HOST_USER = config('EMAIL_Host_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_Host_PASSWORD')
 EMAIL_USE_SSL = False
 
-RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
-RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
-RECAPTCHA_DOMAIN = 'www.gsaportaria.com.br'
 
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = (
