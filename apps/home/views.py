@@ -12,6 +12,7 @@ class HomeView(TemplateView):
         context['destaques'] = self.get_destaques()
         context['servicos_home'] = self.get_servicos_home()
         context['parceiros'] = Parceiros.objects.filter(ativo=True)
+        context['active_home'] = True
         return context
 
     def get_carousel(self):
