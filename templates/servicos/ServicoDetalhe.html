@@ -57,26 +57,27 @@
                         <hr>
                         <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Solicitar Orçamento</a></h6>
                         <hr>
-                        <form>
+                        <form method="post">
+                            {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-sm-4 form-group">
-                                    <input type="text" class="form-control" value="Nome">
+                                    <input type="text" name="nome" class="form-control" value="Nome">
                                 </div>
                                 <div class="col-sm-4 form-group">
-                                    <input type="text" class="form-control" value="{{ object.titulo }}" disabled>
+                                    <input type="text" name="servico" class="form-control" value="{{ object.titulo }}" disabled>
                                 </div>
                                 <div class="col-sm-4 form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" name="email" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="col-sm-4 form-group">
-                                    <input type="url" class="form-control" placeholder="whatsapp">
+                                    <input type="text" name="whatsapp" class="form-control" placeholder="whatsapp">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <textarea name="" id="" cols="30" rows="10" class="form-control"
+                                    <textarea name="mensagem" id="" cols="30" rows="10" class="form-control"
                                               placeholder="Enter Your Comment Here"></textarea>
                                 </div>
                                 <div class="form-group col-12">
-                                    <button class="btn-blog btn-primary btn-blog-block">Solicitar Orçamento</button>Ç
+                                    <button type="submit" class="btn-blog btn-primary btn-blog-block">Solicitar Orçamento</button>Ç
                                 </div>
                             </div>
 
