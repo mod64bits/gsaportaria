@@ -1,6 +1,7 @@
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from apps.core.envio_email import SendGSAMail
 from .forms import ContatoForm
 from .models import Contato
 
@@ -22,14 +23,9 @@ class ContatoFormView(SuccessMessageMixin, CreateView):
         nome = form.cleaned_data.get('nome')
         email = form.cleaned_data.get('email')
         whatsapp = form.cleaned_data.get('whatsapp')
-        mensagem_form = form.cleaned_data.get('mensagem')
-        mensagem = f"Nome: {nome}, WhatsApp: {whatsapp}, Mensagem: {mensagem_form}, email: {email}"
-        send_mail(
-            subject,
-            mensagem,
-            'contato@gsaportaria.com.br',
-            ['gilsimar@gsaportaria.com.br'],
-            fail_silently=False,
+        mensagem = form.cleaned_data.get('mensagem')
 
-        )
+        email_mensagem = SendGSAMail(subject, nome, mensagem, whatsapp)
+        email_mensagem.contato(servico=subject, email=email)
+
         return super().form_valid(form)

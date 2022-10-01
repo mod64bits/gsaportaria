@@ -51,4 +51,24 @@ class SendGSAMail:
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
+    def contato(self, servico, email):
+        context = {
+            "nome": self.nome,
+            "email": email,
+            "servico": servico,
+            "whatsapp": self.whatsapp,
+            "mensagem": self.mensagem
+        }
+        html_content = render_to_string('emails/solicitacao_orcamento_gsa.html', context)
+        text_content = strip_tags(html_content)
+        msg = EmailMultiAlternatives(
+            self.subject,
+            text_content,
+            "contato@gsaportaria.com.br",
+            ["gilsimar@gsaportaria.com.br"]
+        )
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+
     # TODO: Melhorar classe de envio de email

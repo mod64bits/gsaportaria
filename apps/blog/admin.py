@@ -7,7 +7,7 @@ from apps.tag.models import Tag
 class TagInline(GenericStackedInline):
     model = Tag
     fields = 'name',
-    extra = 1
+    extra = 0
 
 @admin.register(Postes)
 class PostesAdmin(admin.ModelAdmin):

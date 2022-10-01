@@ -15,26 +15,12 @@ class ServicoDetalhe(DetailView):
         servico = Servico.objects.get(slug=kwargs['slug'])
         data = request.POST
         SolicitacaoDeOrcamento.objects.nova_solicitacai_orcamento(servico, data)
-        # solict = SolicitacaoDeOrcamento.objects.create(
-        #     nome=request.POST.get('nome'),
-        #     servico=categoria,
-        #     email=request.POST.get('email'),
-        #     whatsapp=request.POST.get('whatsapp'),
-        #     mensagem=request.POST.get('mensagem')
-        # )
-        # enviar_email = SendGSAMail(
-        #     "Solicitação de Orçamento",
-        #     request.POST.get('nome'),
-        #     request.POST.get('mensagem'),
-        #     [solict.email, "gilsimar@gsaportaria.com.br"],
-        # )
-        # enviar_email.solicitacao_orcamento()
 
         return HttpResponseRedirect("/")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['imagens'] = Imagem.objects.filter(servico_id=self.imagens_servicos)
+        # context['tags'] = True
         return context
 
 
