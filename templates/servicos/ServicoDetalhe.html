@@ -41,11 +41,13 @@
 
                     <div class="col-6">
                         <div class="d-flex align-items-center">
-                            {% for tag in object.tags.all %}
-                                <div class="ms-4">
-                                    <p class="text-primary mb-2">#{{ tag.name }}</p>
-                                </div>
-                            {% endfor %}
+                            {% if object.tags %}
+                                {% for tag in object.tags.all %}
+                                    <div class="ms-4">
+                                        <p class="text-primary mb-2">#{{ tag.name }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
 
                         </div>
                     </div>
@@ -54,7 +56,7 @@
         </div>
 
     </div>
-     <a href="https://wa.me/55{{ site_infor.telefone }}?text=Ola%20gostaria%20de%20duvida" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;
+    <a href="https://wa.me/55{{ site_infor.telefone }}?text=Ola%20gostaria%20de%20duvida" style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;
   z-index:1000;" target="_blank">
         <i style="margin-top:16px" class="fab fa-whatsapp"></i>
     </a>
