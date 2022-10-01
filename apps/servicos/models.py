@@ -2,6 +2,8 @@ from django.db import models
 import uuid
 from django.urls import reverse
 from apps.base.models import BaseModelSlug, BaseModelUUID
+from apps.tag.models import Tag
+from django.contrib.contenttypes.fields import GenericRelation
 from apps.core.signals import create_slug
 from django.db.models import signals
 
@@ -29,6 +31,7 @@ class Servico(BaseModelSlug):
     ativo = models.BooleanField('Ativo', default=True)
     slider = models.BooleanField('Slider', default=False)
     descricao = models.TextField('Descrição')
+    tags = GenericRelation(Tag, related_query_name='servico_tags')
 
     slug_from = 'titulo'
 

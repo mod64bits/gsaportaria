@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.apontamento',
     'apps.contato',
+    'apps.blog',
+    'apps.tag',
+    'apps.orcamentos',
 ]
 
 MIDDLEWARE = [

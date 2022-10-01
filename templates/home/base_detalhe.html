@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GSA || Contato</title>
+    <title>{% block title %}GSA || Contato{% endblock title %}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -31,6 +31,8 @@
     <link href="{% static 'home/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
+    {% block css %}
+    {% endblock css %}
     <link href="{% static 'home/css/style.css' %}" rel="stylesheet">
 </head>
 
@@ -58,17 +60,19 @@
 
 
 <!-- Page Header Start -->
-<div class="container-fluid page-header py-5">
-    <div class="container py-5">
-        <h1 class="display-3 text-white mb-3 animated slideInDown">Contato</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-white" href="{% url 'home:home' %}">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Contato</a></li>
-            </ol>
-        </nav>
+{% block header_pagina %}
+    <div class="container-fluid page-header py-5">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Contato</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-white" href="{% url 'home:home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Contato</a></li>
+                </ol>
+            </nav>
+        </div>
     </div>
-</div>
+{% endblock header_pagina %}
 <!-- Page Header End -->
 
 
