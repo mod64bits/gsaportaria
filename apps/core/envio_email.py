@@ -46,7 +46,7 @@ class SendGSAMail:
             self.subject,
             text_content,
             "contato@gsaportaria.com.br",
-            to
+            ["gilsimar@gsaportaria.com.br"]
         )
         msg.attach_alternative(html_content, "text/html")
         msg.send()
