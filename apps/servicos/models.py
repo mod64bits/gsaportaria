@@ -38,6 +38,9 @@ class Servico(BaseModelSlug):
     def __str__(self):
         return self.titulo.title()
 
+    def get_absolute_url(self):
+        return reverse('servicos:servico_detalhe', kwargs={'slug': self.slug})
+
     class Meta:
         ordering = ["-created_at"]
         verbose_name_plural = "Serviços"

@@ -1,6 +1,5 @@
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.mail import send_mail
 from apps.core.envio_email import SendGSAMail
 from .forms import ContatoForm
 from .models import Contato
