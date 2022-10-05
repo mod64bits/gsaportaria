@@ -49,6 +49,7 @@ class HomeView(TemplateView):
                 "imagem": item.imagem,
                 "categoria": item.categoria,
                 "descricao": item.descricao,
+                "slug": item.slug,
                 "time": f"0.{cont}s"
             })
             cont += 1
