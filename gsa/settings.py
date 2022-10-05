@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rest_framework',
     'global_permissions',
+    'django_filters',
 
     'apps.servicos.templatetags',
 
