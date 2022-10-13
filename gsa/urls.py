@@ -13,6 +13,7 @@ from django.conf import settings
 
 
 urlpatterns = [
+    path('tinymce/', include('tinymce.urls')),
     path('contato/', include(contato_url)),
     path('apontamento/', include(apontamento_url)),
     path('qr/', include(qr_url)),
