@@ -20,11 +20,15 @@
                             <img class="img-fluid w-100" src="{{ servico.imagem.url }}" style="height: 300px" alt="">
                             <div class="text-center p-4">
                                 <p class="text-primary mb-2">{{ servico.nome }}</p>
-                                <h5 class="lh-base mb-0">{{ servico.descricao| slice:"0:100" }}...</h5>
+                                {% autoescape off %}
+                                    <h5 class="lh-base mb-0">{{ servico.descricao| slice:"0:100" }}...</h5>
+                                {% endautoescape off %}
                             </div>
                             <div class="portfolio-text text-center bg-white p-4">
                                 <p class="text-primary mb-2">{{ servico.nome }}</p>
-                                <h5 class="lh-base mb-3">{{ servico.descricao| slice:"0:100" }}...</h5>
+                                {% autoescape off %}
+                                    <h5 class="lh-base mb-3">{{ servico.descricao| slice:"0:100" }}...</h5>
+                                {% endautoescape %}
                                 <div class="d-flex justify-content-center">
                                     <a class="btn btn-square btn-primary rounded-circle mx-1" href="{{ servico.imagem.url }}"
                                        data-lightbox="portfolio"><i class="fa fa-eye"></i></a>

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'global_permissions',
     'django_filters',
+    'tinymce',
 
     'apps.servicos.templatetags',
 
@@ -175,4 +176,10 @@ MESSAGE_TAGS = {
     messages_constants.SUCCESS: 'success',
     messages_constants.WARNING: 'warning',
     messages_constants.ERROR: 'danger',
+}
+
+TINYMCE_DEFAULT_CONFIG = {
+    "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,", #plugins
+    "toolbar":"undo redo | formatselect | image |", #toolbar
+    "height": 500, #texteditor height
 }

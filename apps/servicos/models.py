@@ -6,6 +6,8 @@ from apps.tag.models import Tag
 from django.contrib.contenttypes.fields import GenericRelation
 from apps.core.signals import create_slug
 from django.db.models import signals
+from tinymce.models import HTMLField
+
 
 
 class Categoria(BaseModelSlug):
@@ -30,7 +32,7 @@ class Servico(BaseModelSlug):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='cat_servicos')
     ativo = models.BooleanField('Ativo', default=True)
     slider = models.BooleanField('Slider', default=False)
-    descricao = models.TextField('Descrição')
+    descricao = HTMLField('Descrição')
     tags = GenericRelation(Tag, related_query_name='servico_tags')
 
     slug_from = 'titulo'
