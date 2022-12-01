@@ -67,10 +67,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class=" form-check">
-                                                {% render_field form.captcha %}
-                                            </div>
+                                        <div class="col-md-12 form-group">
+                                            {% render_field form.captcha  class="form-control" %}
                                         </div>
                                         <button class="btn btn-primary w-100 py-3" type="submit">Enviar Mensagem
                                         </button>

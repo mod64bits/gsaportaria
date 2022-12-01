@@ -1,4 +1,6 @@
 from django import forms
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 from .models import Contato, Departamento
 
 
@@ -9,6 +11,7 @@ class ContatoForm(forms.ModelForm):
 
         self.fields['departamento'] = forms.CharField(label="Departamento", max_length=30,
                                                       widget=forms.Select(choices=self.get_servicos()))
+        self.fields['captcha'] = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     def get_servicos(self):
         items = Departamento.objects.filter(ativo=True).values('nome')
