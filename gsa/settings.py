@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'global_permissions',
     'django_filters',
     'tinymce',
+    'captcha',
 
     'apps.servicos.templatetags',
 
@@ -183,3 +184,10 @@ TINYMCE_DEFAULT_CONFIG = {
     "toolbar":"undo redo | formatselect | image |", #toolbar
     "height": 500, #texteditor height
 }
+
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+
+RECAPTCHA_PROXY = {'http': 'http://127.0.0.1:8000', 'https': 'https://127.0.0.1:8000'}
